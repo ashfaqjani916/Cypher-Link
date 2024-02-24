@@ -47,7 +47,8 @@ const Navbar = () => {
           <SiPolymerproject className='text-[#1dc071]'/>
           </div>
           <IoMenu
-          className=''
+          className='text-[#1dc071]'
+          size={20}
           onClick={() => setToggleDrawer((prev) => !prev)}
           />
 
