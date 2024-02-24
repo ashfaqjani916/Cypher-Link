@@ -8,7 +8,7 @@ import { IoMenu } from "react-icons/io5";
 import { navlinks } from '@/constants';
 import { CiSearch } from "react-icons/ci";
 import { Button } from './ui/button';
-import { SiGraylog, SiPolymerproject } from 'react-icons/si';
+import { SiPolymerproject } from 'react-icons/si';
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ const Navbar = () => {
       )}
 
 
-        <Link to="/profile">
+        <Link to="/dashboard">
           <div className="w-[52px] h-[52px] rounded-full bg-[#2c2f32] flex justify-center items-center cursor-pointer">
             <img src={'/metamask-icon.webp'} alt="user" className="w-[60%] h-[60%] object-contain" />
           </div>

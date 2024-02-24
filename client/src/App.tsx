@@ -5,7 +5,8 @@ import Sidebar from '@/components/Sidebar';
 import Navbar from '@/components/Navbar';
 import Home from '@/pages/Home';
 import CreateCampaign from '@/pages/CreateCampaign';
-// import { CampaignDetails, CreateCampaign, Home, Profile } from './pages';
+import CampaignDetails from '@/pages/CampaignDetails';
+import Dashboard from '@/pages/Dashboard';
 
 const App = () => {
   return (
@@ -20,6 +21,8 @@ const App = () => {
          <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/create-campaign" element={<CreateCampaign/>} />
+          <Route path="/dashboard" element={<Dashboard/>} />
+          <Route path="/campaign-details/:id" element={<CampaignDetails />} />
         </Routes>
       </div>
     </div>
