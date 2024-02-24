@@ -26,7 +26,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-const data: Crypto[] = [
+const CryptoData: Crypto[] = [
   {
     id: 1,
     name: "Bitcoin",
@@ -94,9 +94,6 @@ const data: Crypto[] = [
 ];
 
 
-
-
-export default data;
 
 
 type Crypto = {
@@ -203,6 +200,36 @@ export const columns: ColumnDef<Crypto>[] = [
 ];
 
 export function CryptoTable() {
+  const [data, setCryptoData] = React.useState<Crypto[]>(CryptoData);
+
+  const generateRandomData = () => {
+    const newData: Crypto[] = data.map((crypto) => ({
+      ...crypto,
+      price: crypto.price + getRandomChange(),
+      marketCap: getRandomMarketCap(),
+      volume24h: getRandomVolume(),
+      change24h: getRandomChange(),
+    }));
+
+    setCryptoData(newData);
+  };
+  const getRandomChange = () => (Math.random() - 0.5) * 10;
+  const getRandomMarketCap = () => Math.floor(Math.random() * 1e12);
+  const getRandomVolume = () => Math.floor(Math.random() * 1e10);
+
+  React.useEffect(() => {
+    // Initial random data
+    generateRandomData();
+
+    // Set up interval for periodic updates
+    const intervalId = setInterval(() => {
+      generateRandomData();
+    }, 1500);
+
+    // Clean up the interval on component unmount
+    return () => clearInterval(intervalId);
+  }, []);
+  
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
