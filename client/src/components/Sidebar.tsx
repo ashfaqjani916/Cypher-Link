@@ -1,6 +1,6 @@
 // import React from 'react';
 import { Link,useNavigate } from 'react-router-dom';
-import { SiGraylog, SiPolymerproject } from 'react-icons/si';
+import { SiPolymerproject } from 'react-icons/si';
 import { navlinks } from '@/constants';
 import { useState } from 'react';
 
