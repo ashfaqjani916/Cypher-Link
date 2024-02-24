@@ -29,7 +29,7 @@ export function ProjectCard({ title, description, imageSrc, target, currentFundi
         <CardDescription><p>{truncatedDescription}</p></CardDescription>
       </CardHeader>
       <CardContent>
-        <img className="h-[200px] w-full rounded-xl" src={imageSrc} alt="" />
+        <img className="h-[200px] w-full rounded-xl object-cover" src={imageSrc} alt="" />
       </CardContent>
       <CardFooter className="flex flex-col items-center justify-between gap-3">
         <div className="w-full">

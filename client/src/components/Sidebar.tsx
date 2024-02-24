@@ -1,5 +1,5 @@
 // import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import { SiGraylog, SiPolymerproject } from 'react-icons/si';
 import { navlinks } from '@/constants';
 import { useState } from 'react';
@@ -7,12 +7,15 @@ import { useState } from 'react';
 
 
 const Sidebar = () => {
+  const navigate=useNavigate();
   const [isactive,setIsactive]=useState('home');
   
   return (
     <div className="flex flex-col justify-between items-center sticky top-2 h-[90vh]">
       <Link to="/">
-        <SiPolymerproject onClick={()=>setIsactive('home')} className="w-[52px] h-[52px] bg-[#2c2f32] text-[#15F5BA] p-2 rounded-xl" />
+        <SiPolymerproject onClick={()=>{
+          navigate('/')
+          setIsactive('home')}} className="w-[52px] h-[52px] bg-[#2c2f32] text-[#15F5BA] p-2 rounded-xl" />
       </Link>
 
       <div className="flex-1 flex flex-col justify-between items-center bg-[#1c1c24] rounded-[20px] w-[60px] py-4 mt-12">

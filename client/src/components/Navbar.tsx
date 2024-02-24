@@ -23,7 +23,7 @@ const Navbar = () => {
         <input type="text" placeholder="Search for Projects" className="flex w-full font-epilogue font-normal text-[14px] placeholder:text-[#4b5264] text-white bg-transparent outline-none" />
         
         <div className="w-[72px] h-full rounded-[20px] bg-[#4acd8d] flex justify-center items-center cursor-pointer text-white">
-          <CiSearch size={20}/>
+          <CiSearch  size={20}/>
         </div>
       </div>
 
@@ -44,7 +44,7 @@ const Navbar = () => {
 
         <div className="relative flex items-center justify-between sm:hidden">
         <div className="w-[40px] h-[40px] rounded-[10px] bg-[#2c2f32] flex justify-center items-center cursor-pointer">
-          <SiPolymerproject className='text-[#1dc071]'/>
+          <SiPolymerproject onClick={()=>navigate('/')} className='text-[#1dc071]'/>
           </div>
           <IoMenu
           className='text-[#1dc071]'
