@@ -16,16 +16,16 @@ const Sidebar = () => {
       </Link>
 
       <div className="flex-1 flex flex-col justify-between items-center bg-[#1c1c24] rounded-[20px] w-[60px] py-4 mt-12">
-        <div className="flex flex-col items-center justify-center gap-6">
+        <div className="flex flex-col items-center justify-center gap-8">
           {navlinks.map((link) => (
             <div id={link.name} key={link.name}>
               <Link
-  to={link.link}
-  onClick={() => setIsactive(link.name)}
-  className={` text-xl hover:text-[#15F5BA] text-white ${isactive === link.name ? 'text-[#15F5BA] rounded-lg bg-[#2c2f32]' : ''}`}
->
-  {link.icon}
-</Link>
+              to={link.link}
+              onClick={() => setIsactive(link.name)}
+              className={` text-2xl hover:text-[#15F5BA] text-white ${isactive === link.name ? 'text-[#15F5BA] rounded-lg bg-[#2c2f32]' : ''}`}
+            >
+              {link.icon}
+            </Link>
 
 
             </div>
