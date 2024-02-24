@@ -10,15 +10,24 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@radix-ui/react-slot": "^1.0.2",
     "@thirdweb-dev/auth": "^4.1.33",
     "@thirdweb-dev/react": "^4.4.9",
     "@thirdweb-dev/sdk": "^4.0.36",
+    "@vitejs/plugin-react": "^4.2.1",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
     "dotenv": "^16.4.5",
     "ethers": "^5.7.2",
+    "lucide-react": "^0.338.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-icons": "^5.0.1",
+    "tailwind-merge": "^2.2.1",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@types/node": "^20.11.20",
     "@types/react": "^18.2.56",
     "@types/react-dom": "^18.2.19",
     "@typescript-eslint/eslint-plugin": "^7.0.2",
