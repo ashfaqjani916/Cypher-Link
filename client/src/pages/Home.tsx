@@ -1,6 +1,6 @@
 import { CryptoTable } from '@/components/CryptoTable'
 import { ProjectCard } from '@/components/ProjectCard'
-import { SiGraylog, SiPolymerproject } from 'react-icons/si';
+import { SiPolymerproject } from 'react-icons/si';
 
 export default function Home() {
   return (

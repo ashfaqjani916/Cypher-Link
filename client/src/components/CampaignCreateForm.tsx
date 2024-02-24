@@ -21,7 +21,7 @@ interface CampaignCreate{
   title:string;
   description:string;
   target:number;
-  deadline:number;
+  deadline:number | undefined;
   image:string;
 }
 
@@ -30,7 +30,7 @@ interface CampaignCreateFormProps {
 }
 
 const CampaignCreateForm: React.FC<CampaignCreateFormProps> = ({ onSubmit }) => {
-  const [date, setDate] = React.useState<Date>(new Date(2030, 2, 16));
+  const [date, setDate] = React.useState<Date>();
   const [form, setForm] = useState<CampaignCreate>({
     title: '',
     description: '',
@@ -52,8 +52,10 @@ const CampaignCreateForm: React.FC<CampaignCreateFormProps> = ({ onSubmit }) => 
     // Assuming 'date' is a variable containing the new date value
     setForm({
       ...form,
-      deadline: Math.floor(date.getTime() / 1000),
+      deadline: date?.getTime() ? Math.floor(date.getTime() / 1000) : undefined,
     });
+    
+    
     
     console.log(form);
   

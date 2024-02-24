@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react';
+import { useEffect,useState } from 'react';
 import CountBox from '@/components/CountBox';
 import { ProjectCard } from '@/components/ProjectCard';
 
