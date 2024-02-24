@@ -26,7 +26,7 @@ export const navlinks = [
   {
     name: 'payment',
     icon: <MdOutlinePayment/>,
-    link: '/',
+    link: '/payment',
     disabled: true,
   },
   {
@@ -37,7 +37,7 @@ export const navlinks = [
   {
     name: 'withdraw',
     icon: <BiMoneyWithdraw/>,
-    link: '/',
+    link: '/withdraw',
     disabled: true,
   },
   {
