@@ -66,4 +66,4 @@ contract CrowdFunding {
 
         return allCampaigns;
     }
-} 
+}
