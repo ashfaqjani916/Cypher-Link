@@ -6,6 +6,8 @@ import Home from '@/pages/Home';
 import CreateCampaign from '@/pages/CreateCampaign';
 import CampaignDetails from '@/pages/CampaignDetails';
 import Dashboard from '@/pages/Dashboard';
+import Analysis from './pages/Analysis';
+import NotFoundPage from './pages/NotFound';
 
 const App = () => {
   return (
@@ -22,6 +24,9 @@ const App = () => {
           <Route path="/create-campaign" element={<CreateCampaign/>} />
           <Route path="/dashboard" element={<Dashboard/>} />
           <Route path="/campaign-details/:id" element={<CampaignDetails />} />
+          <Route path="/analysis" element={<Analysis/>} />
+          <Route path="/payment" element={<NotFoundPage/>} />
+          <Route path="/withdraw" element={<NotFoundPage/>} />
         </Routes>
       </div>
     </div>
