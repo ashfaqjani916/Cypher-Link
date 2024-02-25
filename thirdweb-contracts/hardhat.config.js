@@ -33,11 +33,12 @@ module.exports = {
   // },
   solidity: {
     version: "0.8.9",
-    defaultNetwork: "sepolia",
+    defaultNetwork: "mumbai",
     networks: {
       hardhat:{},
       sepolia: {
-        url: "https://eth-sepolia.g.alchemy.com/v2/demo",
+        // url: "https://eth-sepolia.g.alchemy.com/v2/demo",
+        url: "https://80001.rpc.thirdweb.com",
         accounts: [`0x${process.env.PRIVATE_KEY}`],
       }
     },
