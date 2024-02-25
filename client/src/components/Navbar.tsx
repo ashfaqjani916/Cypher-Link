@@ -1,13 +1,12 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-
+import { MetaConnect } from '@/components/Login';
 // import { useStateContext } from '../context';
 // import { CustomButton } from './';
 // import { logo, menu, search, thirdweb } from '../assets';
 import { IoMenu } from "react-icons/io5";
 import { navlinks } from '@/constants';
 import { CiSearch } from "react-icons/ci";
-import { Button } from './ui/button';
 import { SiPolymerproject } from 'react-icons/si';
 
 const Navbar = () => {
@@ -15,7 +14,6 @@ const Navbar = () => {
   const [isActive, setIsActive] = useState('dashboard');
   const [toggleDrawer, setToggleDrawer] = useState(false);
   // const { connect, address } = useStateContext();
-  const address=null;
 
   return (
     <div className="flex md:flex-row flex-col-reverse justify-between mb-[35px] gap-6">
@@ -28,11 +26,7 @@ const Navbar = () => {
       </div>
 
       <div className="flex-row items-center justify-end hidden gap-4 sm:flex">
-      {address ? (
-        <Button>Start a Project</Button>
-      ) : (
-        <Button className='flex items-center gap-2 bg-[#4acd8d]'><img src={'/metamask-icon.webp'} alt="user" className="w-[60%] h-[60%] object-contain" />Connect Wallet</Button>
-      )}
+      <MetaConnect/>
 
 
         <Link to="/dashboard">
@@ -73,11 +67,7 @@ const Navbar = () => {
             </ul>
 
             <div className="flex mx-4">
-                        {address ? (
-              <Button>Start a Project</Button>
-            ) : (
-              <Button>Connect Wallet</Button>
-            )}
+                  <MetaConnect/>
             </div>
           </div>
         </div>

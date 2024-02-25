@@ -3,6 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { ThirdwebProvider, ChainId } from '@thirdweb-dev/react';
 import App from './App';
 import './index.css';
+import { MetaMaskProvider } from "@metamask/sdk-react";
 // Remove the unused import statement
 //  import {StateProvider} from './context';
 
@@ -19,7 +20,18 @@ const chainIdProps: ChainIdProps = {
 root.render(
   <ThirdwebProvider {...chainIdProps}>
     <Router>
-      <App />
+    <MetaMaskProvider
+            debug={false}
+            sdkOptions={{
+                dappMetadata: {
+                    name: "Example React Dapp",
+                    url: window.location.href,
+                },
+                // Other options
+            }}
+        >
+            <App />
+        </MetaMaskProvider>
     </Router>
   </ThirdwebProvider>
 );

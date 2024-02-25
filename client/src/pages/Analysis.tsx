@@ -1,7 +1,7 @@
 import MyChart from '@/components/charts/LineChart'
 import BarChart from '@/components/charts/BarChart'
 import PieChart from '@/components/charts/PieChart'
-import RadarChart from '@/components/charts/RadarChart'
+// import RadarChart from '@/components/charts/RadarChart'
 import MultiChart from '@/components/charts/MultiLineChart'
 
 function Analysis() {
