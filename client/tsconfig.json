@@ -9,9 +9,9 @@
     "paths": {
       "@/*": ["./src/*"]
     },
+    "moduleResolution": "node", // Add this line to fix the problem
 
     /* Bundler mode */
-    "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
