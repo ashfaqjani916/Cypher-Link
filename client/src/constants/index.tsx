@@ -10,45 +10,62 @@ import { MdCampaign } from "react-icons/md";
 export const navlinks = [
   {
     name: 'home',
-    icon: <IoHome/>,
+    icon: <IoHome />,
     link: '/',
   },
   {
     name: 'dashboard',
-    icon:<MdDashboard/>,
-    link:'/dashboard'
+    icon: <MdDashboard />,
+    link: '/dashboard'
   },
   {
     name: 'campaign',
-    icon: <MdCampaign/>,
+    icon: <MdCampaign />,
     link: '/create-campaign',
   },
   {
     name: 'payment',
-    icon: <MdOutlinePayment/>,
+    icon: <MdOutlinePayment />,
     link: '/payment',
     disabled: true,
   },
   {
-    name:'analysis',
-    icon: <SiGoogleanalytics/>,
-    link:'/analysis'
+    name: 'analysis',
+    icon: <SiGoogleanalytics />,
+    link: '/analysis'
   },
   {
     name: 'withdraw',
-    icon: <BiMoneyWithdraw/>,
+    icon: <BiMoneyWithdraw />,
     link: '/withdraw',
     disabled: true,
   },
   {
     name: 'profile',
-    imgUrl: <CgProfile/>,
+    imgUrl: <CgProfile />,
     link: '/profile',
   },
   {
     name: 'logout',
-    icon: <IoMdLogOut/>,
+    icon: <IoMdLogOut />,
     link: '/',
     disabled: true,
   },
 ];
+
+
+export interface CampaignData {
+  owner: string;
+  title: string;
+  description: string;
+  target: string;
+  deadline: Date;
+  amountCollected: string;
+  image: string;
+  pId: number;
+}
+
+
+export interface Donation {
+
+}

@@ -13,7 +13,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
-import { ArrowUpDown} from "lucide-react"
+import { ArrowUpDown } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -100,8 +100,8 @@ type Crypto = {
   id: number;
   name: string;
   price: number;
-  marketCap: number;  
-  volume24h: number;  
+  marketCap: number;
+  volume24h: number;
   change24h: number;
 };
 
@@ -122,7 +122,7 @@ export const columns: ColumnDef<Crypto>[] = [
     ),
   },
   {
-    accessorKey: "marketCap", 
+    accessorKey: "marketCap",
     header: ({ column }) => {
       return (
         <Button
@@ -229,7 +229,7 @@ export function CryptoTable() {
     // Clean up the interval on component unmount
     return () => clearInterval(intervalId);
   }, []);
-  
+
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -271,19 +271,19 @@ export function CryptoTable() {
       </div>
       <div className="border rounded-md">
         <Table>
-          <TableHeader  className="text-[#4acd8d]">
+          <TableHeader className="text-[#4acd8d]">
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}  className="text-[#4acd8d] text-center">
+              <TableRow key={headerGroup.id} className="text-[#4acd8d] text-center">
                 {headerGroup.headers.map((header) => {
                   return (
                     <TableHead key={header.id}
-                    className="text-[#4acd8d]">
+                      className="text-[#4acd8d]">
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
                     </TableHead>
                   )
                 })}
@@ -327,7 +327,7 @@ export function CryptoTable() {
         </div>
         <div className="space-x-2">
           <Button
-           className="bg-[#4acd8d]"
+            className="bg-[#4acd8d]"
             size="sm"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
@@ -335,7 +335,7 @@ export function CryptoTable() {
             Previous
           </Button>
           <Button
-             className="bg-[#4acd8d]"
+            className="bg-[#4acd8d]"
             size="sm"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}

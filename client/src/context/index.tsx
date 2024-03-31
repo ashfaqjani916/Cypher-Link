@@ -1,65 +1,138 @@
-// import React, { createContext, useContext, useState, ReactNode } from 'react';
-// import { useAddress, useContract, ConnectWallet, useContractWrite } from '@thirdweb-dev/react';
-// import { ethers } from 'ethers';
+import { useContext, createContext } from 'react';
+import { CampaignData } from '@/constants';
 
-// interface StateContextValues {
-//   address: string;
-//   contract: ethers.Contract;
-//   createCampaign: (form: CampaignForm) => Promise<void>;
-// }
+import { MetaMaskWallet, useAddress, useMetamask } from '@thirdweb-dev/react';
+import { ethers } from 'ethers';
+import { ThirdwebSDK } from '@thirdweb-dev/sdk';
 
-// const StateContext = createContext<StateContextValues | null>(null);
+interface Campaign {
+  owner: string;
+  title: string;
+  description: string;
+  target: number;
+  deadline: number;
+  amountCollected: number;
+  image: string;
+  donators: string[];
+  donations: number[];
+}
 
-// interface CampaignForm {
-//   title: string;
-//   description: string;
-//   target: ethers.BigNumber;
-//   deadline: Date;
-//   image: string;
-// }
+interface CrowdFundingContextType {
+  connect: (options?: { chainId?: number | undefined; } | undefined) => Promise<MetaMaskWallet>
+  campaigns: Campaign[];
+  createCampaign: (form: Campaign) => Promise<void>;
+  donateToCampaign: (id: number) => Promise<void>;
+  getDonators: (id: number) => Promise<{ donators: string[], donations: number[] }>;
+  getCampaigns: () => Promise<Campaign[]>;
+  getUserCampaigns: () => Promise<Campaign[]>
+  donate: (pId: number, amount: string) => Promise<any>
+  getDonations: (pId: number) => Promise<{ donator: any; donation: string; }[]>
+}
 
-// interface StateProviderProps {
-//   children: ReactNode;
-// }
+const StateContext = createContext<Partial<CrowdFundingContextType>>({});
 
-// export const StateProvider: React.FC<StateProviderProps> = ({ children }: StateProviderProps) => {
-//   const [connected, setConnected] = useState(false);
 
-//   const { contract } = useContract<ethers.Contract>('0xB8Cd14CD7881187948E168a0923eb750d2c21B5e' as string);
-//   const { mutateAsync: createCampaign } = useContractWrite(contract, 'createCampaign');
+export const StateContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
-//   const address = useAddress();
 
-//   const connectWallet = async () => {
-//     try {
-//       await ConnectWallet();
-//       setConnected(true);
-//     } catch (error) {
-//       console.error('Wallet connection error:', error);
-//     }
-//   };
+  const address = useAddress();
+  const connect = useMetamask();
 
-//   const publishCampaign = async (form: CampaignForm) => {
-//     try {
-//       const data = await createCampaign([
-//         address,
-//         form.title,
-//         form.description,
-//         form.target,
-//         new Date(form.deadline).getTime(),
-//         form.image,
-//       ]);
-//       console.log('Contract call successful', data);
-//     } catch (error) {
-//       console.error('Contract call failure', error);
-//     }
-//   };
+  const publishCampaign = async (form: Campaign) => {
+    const sdk = new ThirdwebSDK("sepolia");
+    const contract = await sdk.getContract('0xB8Cd14CD7881187948E168a0923eb750d2c21B5e');
+    try {
+      const data = await contract.call(
+        'createCampaign',
+        [
+          address,
+          form.title,
+          form.description,
+          form.target,
+          new Date(form.deadline).getTime(),
+          form.image,
+        ]
+      );
+      console.log("contract call success", data)
+    } catch (error) {
+      console.log("contract call failure", error)
+    }
+  }
 
-//   return (
-//     <StateContext.Provider value={{ address :string, contract, createCampaign: publishCampaign }}>
-//       {connected ? children : <button onClick={connectWallet}>Connect Wallet</button>}
-//     </StateContext.Provider>
-//   );
-// };
 
-// export const useStateContext = () => useContext(StateContext);
+  const getCampaigns = async () => {
+    try {
+      const sdk = new ThirdwebSDK("sepolia");
+      const contract = await sdk.getContract('0xB8Cd14CD7881187948E168a0923eb750d2c21B5e');
+      const campaigns = await contract.call('getCampaigns');
+
+      const parsedCampaings = campaigns.map((campaign: CampaignData, i: number) => ({
+        owner: campaign.owner,
+        title: campaign.title,
+        description: campaign.description,
+        target: ethers.utils.formatEther(campaign.target.toString()),
+        deadline: new Date(campaign.deadline).getTime(),
+        amountCollected: ethers.utils.formatEther(campaign.amountCollected.toString()),
+        image: campaign.image,
+        pId: i
+      }));
+
+      return parsedCampaings;
+    } catch (error) {
+      console.error("Error fetching campaigns:", error);
+      return [];
+    }
+  }
+
+
+  const getUserCampaigns = async () => {
+    const allCampaigns = await getCampaigns();
+    const filteredCampaigns = allCampaigns.filter((campaign: CampaignData) => campaign.owner === address);
+
+    return filteredCampaigns;
+  }
+
+  const donate = async (pId: number, amount: string) => {
+    const sdk = new ThirdwebSDK("sepolia");
+    const contract = await sdk.getContract('0xf59A1f8251864e1c5a6bD64020e3569be27e6AA9');
+    const data = await contract.call('donateToCampaign', [pId], { value: ethers.utils.parseEther(amount) });
+
+    return data;
+  }
+
+  const getDonations = async (pId: number) => {
+    const sdk = new ThirdwebSDK("sepolia");
+    const contract = await sdk.getContract('0xf59A1f8251864e1c5a6bD64020e3569be27e6AA9');
+    const donations = await contract.call('getDonators', [pId]);
+    const numberOfDonations = donations[0].length;
+
+    const parsedDonations = [];
+
+    for (let i = 0; i < numberOfDonations; i++) {
+      parsedDonations.push({
+        donator: donations[0][i],
+        donation: ethers.utils.formatEther(donations[1][i].toString())
+      })
+    }
+
+    return parsedDonations;
+  }
+
+
+  return (
+    <StateContext.Provider
+      value={{
+        connect,
+        createCampaign: publishCampaign,
+        getCampaigns,
+        getUserCampaigns,
+        donate,
+        getDonations
+      }}
+    >
+      {children}
+    </StateContext.Provider>
+  )
+}
+
+export const useStateContext = () => useContext(StateContext);
