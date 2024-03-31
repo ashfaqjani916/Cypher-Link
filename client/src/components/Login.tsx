@@ -4,13 +4,13 @@ import { useSDK } from '@metamask/sdk-react';
 export const MetaConnect: React.FC = () => {
   const [account, setAccount] = useState<string | undefined>();
   const { sdk, connected, chainId } = useSDK();
-  
+
   const connect = async () => {
     try {
       if (sdk) {
         const accounts = await sdk.connect();
         console.log(accounts);
-  
+
         if (Array.isArray(accounts) && accounts.length > 0) {
           setAccount(accounts[0]);
         } else {
@@ -21,7 +21,7 @@ export const MetaConnect: React.FC = () => {
       console.warn("failed to connect..", err);
     }
   };
-  
+
   return (
     <div className="App">
       {!connected ? (
@@ -37,5 +37,5 @@ export const MetaConnect: React.FC = () => {
       )}
     </div>
   );
-  
+
 };

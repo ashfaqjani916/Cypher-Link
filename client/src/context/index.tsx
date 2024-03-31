@@ -1,7 +1,7 @@
 import { useContext, createContext } from 'react';
 import { CampaignData } from '@/constants';
 
-import { MetaMaskWallet, useAddress, useMetamask } from '@thirdweb-dev/react';
+import { useAddress, useSigner } from '@thirdweb-dev/react';
 import { ethers } from 'ethers';
 import { ThirdwebSDK } from '@thirdweb-dev/sdk';
 
@@ -17,10 +17,18 @@ interface Campaign {
   donations: number[];
 }
 
+
+interface CampaignCreate {
+  title: string;
+  description: string;
+  target: number;
+  deadline: number | undefined;
+  image: string;
+}
+
 interface CrowdFundingContextType {
-  connect: (options?: { chainId?: number | undefined; } | undefined) => Promise<MetaMaskWallet>
   campaigns: Campaign[];
-  createCampaign: (form: Campaign) => Promise<void>;
+  publishCampaign: (form: CampaignCreate) => Promise<void>;
   donateToCampaign: (id: number) => Promise<void>;
   getDonators: (id: number) => Promise<{ donators: string[], donations: number[] }>;
   getCampaigns: () => Promise<Campaign[]>;
@@ -36,28 +44,35 @@ export const StateContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
 
 
   const address = useAddress();
-  const connect = useMetamask();
+  const signer = useSigner();
 
-  const publishCampaign = async (form: Campaign) => {
-    const sdk = new ThirdwebSDK("sepolia");
-    const contract = await sdk.getContract('0xB8Cd14CD7881187948E168a0923eb750d2c21B5e');
-    try {
-      const data = await contract.call(
-        'createCampaign',
-        [
-          address,
-          form.title,
-          form.description,
-          form.target,
-          new Date(form.deadline).getTime(),
-          form.image,
-        ]
-      );
-      console.log("contract call success", data)
-    } catch (error) {
-      console.log("contract call failure", error)
+  const publishCampaign = async (form: CampaignCreate) => {
+    if (signer) {
+      const sdk = ThirdwebSDK.fromSigner(signer, "sepolia");
+      const contract = await sdk.getContract('0xB8Cd14CD7881187948E168a0923eb750d2c21B5e');
+      console.log(signer?.getAddress())
+      sdk.getSigner()
+      try {
+        const data = await contract.call(
+          'createCampaign',
+          [
+            signer?.getAddress(),
+            form.title,
+            form.description,
+            form.target,
+            form.deadline,
+            form.image,
+          ]
+        );
+        console.log("contract call success", data)
+      } catch (error) {
+        console.log("contract call failure", error)
+      }
     }
+
   }
+
+
 
 
   const getCampaigns = async () => {
@@ -122,8 +137,7 @@ export const StateContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
   return (
     <StateContext.Provider
       value={{
-        connect,
-        createCampaign: publishCampaign,
+        publishCampaign,
         getCampaigns,
         getUserCampaigns,
         donate,

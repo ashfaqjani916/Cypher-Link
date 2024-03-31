@@ -32,7 +32,7 @@ function CreateCampaign() {
   // }, []); 
   return (
     <div className='text-white'>
-      <CampaignCreateForm onSubmit={()=>{}}/>
+      <CampaignCreateForm />
     </div>
   )
 }

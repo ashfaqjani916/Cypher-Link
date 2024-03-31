@@ -3,16 +3,28 @@ import { ProjectCard } from '@/components/ProjectCard'
 import { SiPolymerproject } from 'react-icons/si';
 
 import { useStateContext } from '@/context';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+
+
+interface Campaign {
+  title: string;
+  description: string;
+  target: number;
+  deadline: number | undefined;
+  image: string;
+}
 
 export default function Home() {
   const { getCampaigns } = useStateContext();
+  const [campaignData, setCampaignData] = useState<Campaign[]>([]); // Change 'any' to the actual type of campaign data
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await getCampaigns?.();
-        console.log(data);
+        if (data) {
+          setCampaignData(data);
+        }
       } catch (error) {
         console.error('Error fetching campaigns:', error);
       }
@@ -31,6 +43,17 @@ export default function Home() {
         </div>
       </div>
       <div className='flex flex-wrap items-center justify-start gap-5'>
+        {campaignData.map((campaign, index) => (
+          <ProjectCard
+            key={index}
+            title={campaign.title}
+            description={campaign.description}
+            imageSrc={campaign.image}
+            target={2000}
+            currentFunding={100}
+          />
+        ))}
+
         <ProjectCard
           title="Renewable Energy Innovation"
           description="Support the development of a groundbreaking renewable energy solution that aims to revolutionize the way we harness and utilize clean energy."
