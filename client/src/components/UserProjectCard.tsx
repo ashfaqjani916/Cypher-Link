@@ -21,7 +21,6 @@ interface CrowdfundingProject {
 export function ProjectCard({ title, description, imageSrc, target, currentFunding }: CrowdfundingProject) {
   const percentageFunded = (currentFunding / target) * 100;
   const truncatedDescription = description.length > 50 ? description.substring(0, 50) + '...' : description;
-  const navigate = useNavigate();
   return (
     <Card className="max-w-[400px] bg-black text-white border-none rounded-xl">
       <CardHeader>
@@ -32,19 +31,11 @@ export function ProjectCard({ title, description, imageSrc, target, currentFundi
         <CardDescription><p>{truncatedDescription}</p></CardDescription>
       </CardContent>
       <CardFooter className="flex flex-col items-center justify-between gap-3">
-        <div className="w-full">
-          <p>Current Funding: ${currentFunding} Goal: ${target} {percentageFunded}% Funded</p>
+        <div className="w-full flex justify-between">
+          <p>Current Funding: ${currentFunding}</p>
+          <p>{percentageFunded}% Funded</p>
         </div>
-        <div className="flex items-center justify-start w-full gap-3">
-          <Button className="bg-black border border-[#4acd8d] text-[#4acd8d]" onClick={() => navigate(`/campaign-details/${title}`)}>View</Button>
-          <Button className="bg-[#4acd8d]">Donate</Button>
-        </div>
-        <div className="flex items-start justify-center gap-2">
-          <img src="/metamask-icon.webp" className="w-5 h-5" alt="" />
-          <p className="text-xs text-gray-500"> by 0x72857e5a7c0096f0729041d6DDAc28881....</p>
-        </div>
-
       </CardFooter>
-    </Card >
+    </Card>
   );
 }

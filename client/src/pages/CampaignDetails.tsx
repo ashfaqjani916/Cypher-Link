@@ -1,4 +1,4 @@
-import {  useState} from 'react'
+import { useState } from 'react'
 //import { Button } from '@/components/ui/button';
 import CountBox from '@/components/CountBox';
 //import { useStateContext } from '../context';
@@ -7,14 +7,14 @@ import { FundCard } from '@/components/FundCard';
 
 
 
-const state={
-  owner:"0x72857e5a7c0096f0729041d6DDAc288813e8Dc9c",
-  title:"Renewable Energy Innovation",
-  description:"Support the development of a groundbreaking renewable energy solution that aims to revolutionize the way we harness and utilize clean energy.",
-  imageSrc:"https://e1.pxfuel.com/desktop-wallpaper/409/772/desktop-wallpaper-laptop-backgrounds-aesthetic-green-mint-green-aesthetic-top-mint-green-aesthetic-2784x2304-for-your-mobile-tablet-explore-38-aesthetic-green-pc-aesthetic-green-pc-clean-aesthetic-laptop.jpg",
-  target:2000,
-  deadline:1714069800,
-  amountCollected:4.56 
+const state = {
+  owner: "0x72857e5a7c0096f0729041d6DDAc288813e8Dc9c",
+  title: "Renewable Energy Innovation",
+  description: "Socio-Marketo is a decentralized application (dApp) 📱🌐 that revolutionizes social media by integrating blockchain technology. With both mobile and web applications, it introduces a novel approach where every user-generated post is tokenized as a Non-Fungible Token (NFT) 🎨💎, ensuring content authenticity and ownership.",
+  imageSrc: "https://raw.githubusercontent.com/lokeshdarla/foodio/main/images/1.png",
+  target: 2000,
+  deadline: 1714069800,
+  amountCollected: 4.56
 }
 
 
@@ -27,8 +27,8 @@ const donators: Donator[] = [];
 
 for (let i = 0; i < 5; i++) {
   const donator: Donator = {
-    donator: `0x${Math.random().toString(16).substr(2, 8)}`, // Generate a random Ethereum-like address
-    donation: Math.floor(Math.random() * 1000) + 1, // Generate a random donation amount between 1 and 1000
+    donator: `0x${Math.random().toString(16).substr(2, 8)}`,
+    donation: Math.floor(Math.random() * 1000) + 1,
   };
 
   donators.push(donator);
@@ -37,53 +37,53 @@ for (let i = 0; i < 5; i++) {
 
 
 const CampaignDetails = () => {
-//   const { state } = useLocation();
-//   const navigate = useNavigate();
-//   //const { donate, getDonations, contract, address } = useStateContext();
+  //   const { state } = useLocation();
+  //   const navigate = useNavigate();
+  //   //const { donate, getDonations, contract, address } = useStateContext();
 
- // const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   const [amount, setAmount] = useState('');
-//   const [donators, setDonators] = useState([]);
+  //   const [donators, setDonators] = useState([]);
 
-//   const remainingDays = daysLeft(state.deadline);
+  //   const remainingDays = daysLeft(state.deadline);
 
-//  // const fetchDonators = async () => {
-//     const data = await getDonations(state.pId);
+  //  // const fetchDonators = async () => {
+  //     const data = await getDonations(state.pId);
 
-//     setDonators(data);
-//   }
+  //     setDonators(data);
+  //   }
 
-//  // useEffect(() => {
-//     if(contract) fetchDonators();
-//   }, [contract, address])
+  //  // useEffect(() => {
+  //     if(contract) fetchDonators();
+  //   }, [contract, address])
 
-//   const handleDonate = async () => {
-//     setIsLoading(true);
+  //   const handleDonate = async () => {
+  //     setIsLoading(true);
 
-//     await donate(state.pId, amount); 
+  //     await donate(state.pId, amount); 
 
-//     navigate('/')
-//     setIsLoading(false);
-//   }
+  //     navigate('/')
+  //     setIsLoading(false);
+  //   }
 
 
   return (
     <div>
-      {false&& 
+      {false &&
         <div role="status">
-            <svg aria-hidden="true" className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
-                <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
-            </svg>
-            <span className="sr-only">Loading...</span>
+          <svg aria-hidden="true" className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" />
+            <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill" />
+          </svg>
+          <span className="sr-only">Loading...</span>
         </div>
-}
+      }
 
       <div className="w-full flex md:flex-row flex-col mt-10 gap-[30px]">
         <div className="flex-col flex-1">
-          <img src={state.imageSrc} alt="campaign" className="w-full h-[410px] object-cover rounded-xl"/>
-          <div className="relative w-full h-[5px] bg-[#3a3a43] mt-2">
-            <div className="absolute h-full bg-[#4acd8d]" style={{ width: `${calculateBarPercentage(state.target, state.amountCollected)}%`, maxWidth: '100%'}}>
+          <img src={state.imageSrc} alt="campaign" className="w-full h-[410px] object-cover rounded-xl" />
+          <div className="relative w-full h-[5px]">
+            <div className="absolute h-full bg-[#4acd8d]" style={{ width: `${calculateBarPercentage(state.target, state.amountCollected)}%`, maxWidth: '100%' }}>
             </div>
           </div>
         </div>
@@ -102,7 +102,7 @@ const CampaignDetails = () => {
 
             <div className="mt-[20px] flex flex-row items-center flex-wrap gap-[14px]">
               <div className="w-[52px] h-[52px] flex items-center justify-center rounded-full bg-[#2c2f32] cursor-pointer">
-                <img src={'/metamask-icon.webp'} alt="user" className="w-[60%] h-[60%] object-contain"/>
+                <img src={'/metamask-icon.webp'} alt="user" className="w-[60%] h-[60%] object-contain" />
               </div>
               <div>
                 <h4 className="font-epilogue font-semibold text-[14px] text-white break-all">{state.owner}</h4>
@@ -114,27 +114,27 @@ const CampaignDetails = () => {
           <div>
             <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">Story</h4>
 
-              <div className="mt-[20px]">
-                <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] text-justify">{state.description}</p>
-              </div>
+            <div className="mt-[20px]">
+              <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] text-justify">{state.description}</p>
+            </div>
           </div>
 
           <div>
             <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">Donators</h4>
 
-              <div className="mt-[20px] flex flex-col gap-4">
-                {donators.length > 0 ? donators.map((item, index) => (
-                  <div key={`${item.donator}-${index}`} className="flex items-center justify-between gap-4">
-                    <p className="font-epilogue font-normal text-[16px] text-[#b2b3bd] leading-[26px] break-ll">{index + 1}. {item.donator}</p>
-                    <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] break-ll">{item.donation}</p>
-                  </div>
-                )) : (
-                  <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] text-justify">No donators yet. Be the first one!</p>
-                )}
-              </div>
+            <div className="mt-[20px] flex flex-col gap-4">
+              {donators.length > 0 ? donators.map((item, index) => (
+                <div key={`${item.donator}-${index}`} className="flex items-center justify-between gap-4">
+                  <p className="font-epilogue font-normal text-[16px] text-[#b2b3bd] leading-[26px] break-ll">{index + 1}. {item.donator}</p>
+                  <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] break-ll">{item.donation}</p>
+                </div>
+              )) : (
+                <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] text-justify">No donators yet. Be the first one!</p>
+              )}
+            </div>
           </div>
         </div>
-        
+
         <div className="flex-1">
           {/* <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">Fund</h4>    */}
 
@@ -156,7 +156,7 @@ const CampaignDetails = () => {
               >Fund Campaign</Button>
             </div>
           </div> */}
-          <FundCard amount={amount} setAmount={setAmount}/>
+          <FundCard amount={amount} setAmount={setAmount} />
         </div>
       </div>
     </div>

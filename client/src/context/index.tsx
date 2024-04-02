@@ -50,7 +50,6 @@ export const StateContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
     if (signer) {
       const sdk = ThirdwebSDK.fromSigner(signer, "sepolia");
       const contract = await sdk.getContract('0xB8Cd14CD7881187948E168a0923eb750d2c21B5e');
-      console.log(signer?.getAddress())
       sdk.getSigner()
       try {
         const data = await contract.call(
@@ -101,9 +100,10 @@ export const StateContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
 
 
   const getUserCampaigns = async () => {
+    const sdk = new ThirdwebSDK("sepolia");
     const allCampaigns = await getCampaigns();
+    sdk.getSigner()
     const filteredCampaigns = allCampaigns.filter((campaign: CampaignData) => campaign.owner === address);
-
     return filteredCampaigns;
   }
 

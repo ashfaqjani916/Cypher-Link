@@ -8,6 +8,7 @@ import CampaignDetails from '@/pages/CampaignDetails';
 import Dashboard from '@/pages/Dashboard';
 import Analysis from './pages/Analysis';
 import NotFoundPage from './pages/NotFound';
+import { Toaster } from "@/components/ui/toaster"
 
 const App = () => {
   return (
@@ -15,18 +16,18 @@ const App = () => {
       <div className="relative hidden mr-10 sm:flex">
         <Sidebar />
       </div>
-
+      <Toaster />
       <div className="flex-1 max-sm:w-full max-w-[1280px] mx-auto sm:pr-5">
         <Navbar />
 
-         <Routes>
+        <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/create-campaign" element={<CreateCampaign/>} />
-          <Route path="/dashboard" element={<Dashboard/>} />
+          <Route path="/create-campaign" element={<CreateCampaign />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/campaign-details/:id" element={<CampaignDetails />} />
-          <Route path="/analysis" element={<Analysis/>} />
-          <Route path="/payment" element={<NotFoundPage/>} />
-          <Route path="/withdraw" element={<NotFoundPage/>} />
+          <Route path="/analysis" element={<Analysis />} />
+          <Route path="/payment" element={<NotFoundPage />} />
+          <Route path="/withdraw" element={<NotFoundPage />} />
         </Routes>
       </div>
     </div>

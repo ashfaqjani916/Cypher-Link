@@ -4,7 +4,8 @@ import FormField from './FormField';
 import { FaMoneyBillAlt } from "react-icons/fa";
 import { ChangeEvent } from 'react';
 import { useStateContext } from '@/context';
-
+import ReactLoading from 'react-loading';
+import { ToastDemo } from "./ToastDemo";
 
 import { format } from "date-fns"
 import { Calendar as CalendarIcon } from "lucide-react"
@@ -28,6 +29,7 @@ interface CampaignCreate {
 
 const CampaignCreateForm: React.FC = () => {
   const { publishCampaign } = useStateContext();
+  const [loading, setLoading] = useState(false);
   const [date, setDate] = React.useState<Date>();
   const [form, setForm] = useState<CampaignCreate>({
     title: '',
@@ -37,6 +39,15 @@ const CampaignCreateForm: React.FC = () => {
     image: '',
   });
 
+
+  if (loading) {
+    return (
+      <div className='flex items-center justify-center h-screen'>
+        <ReactLoading type={'bars'} color={'white'} height={60} width={60} />
+      </div>
+
+    )
+  }
 
 
 
@@ -52,6 +63,13 @@ const CampaignCreateForm: React.FC = () => {
     });
     console.log("Here")
     publishCampaign?.(form);
+    setForm({
+      title: '',
+      description: '',
+      target: 0,
+      deadline: 0,
+      image: '',
+    });
   };
 
 
@@ -136,6 +154,7 @@ const CampaignCreateForm: React.FC = () => {
             className="bg-[#1dc071]">
             Submit new campaign</Button>
         </div>
+        <ToastDemo />
       </form>
     </div>
   );

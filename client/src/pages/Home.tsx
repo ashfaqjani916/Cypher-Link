@@ -4,6 +4,8 @@ import { SiPolymerproject } from 'react-icons/si';
 
 import { useStateContext } from '@/context';
 import { useEffect, useState } from 'react';
+import ReactLoading from 'react-loading';
+import { ToastDemo } from '@/components/ToastDemo';
 
 
 interface Campaign {
@@ -16,15 +18,18 @@ interface Campaign {
 
 export default function Home() {
   const { getCampaigns } = useStateContext();
+  const [loading, setLoading] = useState(false);
   const [campaignData, setCampaignData] = useState<Campaign[]>([]); // Change 'any' to the actual type of campaign data
 
   useEffect(() => {
+    setLoading(true);
     const fetchData = async () => {
       try {
         const data = await getCampaigns?.();
         if (data) {
           setCampaignData(data);
         }
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching campaigns:', error);
       }
@@ -43,33 +48,25 @@ export default function Home() {
         </div>
       </div>
       <div className='flex flex-wrap items-center justify-start gap-5'>
-        {campaignData.map((campaign, index) => (
-          <ProjectCard
-            key={index}
-            title={campaign.title}
-            description={campaign.description}
-            imageSrc={campaign.image}
-            target={2000}
-            currentFunding={100}
-          />
-        ))}
-
-        <ProjectCard
-          title="Renewable Energy Innovation"
-          description="Support the development of a groundbreaking renewable energy solution that aims to revolutionize the way we harness and utilize clean energy."
-          imageSrc="https://e1.pxfuel.com/desktop-wallpaper/409/772/desktop-wallpaper-laptop-backgrounds-aesthetic-green-mint-green-aesthetic-top-mint-green-aesthetic-2784x2304-for-your-mobile-tablet-explore-38-aesthetic-green-pc-aesthetic-green-pc-clean-aesthetic-laptop.jpg"
-          target={2000}
-          currentFunding={1200}
-        />
-        <ProjectCard
-          title="Renewable Energy Innovation"
-          description="Support the development of a groundbreaking renewable energy solution that aims to revolutionize the way we harness and utilize clean energy."
-          imageSrc="https://e1.pxfuel.com/desktop-wallpaper/189/656/desktop-wallpaper-beautiful-landscape-aesthetic-landscape-purple.jpg"
-          target={2000}
-          currentFunding={1200}
-        />
+        {!loading ? (
+          campaignData.map((campaign, index) => (
+            <ProjectCard
+              key={index}
+              title={campaign.title}
+              description={campaign.description}
+              imageSrc={campaign.image}
+              target={2000}
+              currentFunding={100}
+            />
+          ))
+        ) : (
+          <div className='flex items-center justify-center w-full h-80'>
+            <ReactLoading type={'bars'} color={'white'} height={60} width={60} />
+          </div>
+        )}
 
       </div>
+      <ToastDemo />
       <CryptoTable />
     </div>
   )
